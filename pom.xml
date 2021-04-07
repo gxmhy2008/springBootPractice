@@ -35,6 +35,7 @@
 
     <build>
         <plugins>
+            <!--把应用打包成一个可执行的Jar包-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
