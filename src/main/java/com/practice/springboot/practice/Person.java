@@ -1,8 +1,11 @@
 package com.practice.springboot.practice;
 
 import com.practice.springboot.practice.config.Dog;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +16,17 @@ import java.util.Map;
  */
 @Component
 @ConfigurationProperties(prefix = "person")
+@Validated
 public class Person {
+    /**
+     * @Value类似于bean标签中的value配置;
+     * bean中的value可以配置：字面量;${key}获取环境变量、配置文件中的key值,#{SpEl}spring的EL表达式;
+     * 因此@Value也可以配置上面的三种值。
+     * <bean id = "person" class="xxxxx">
+     *     <property name="address" value="xxx"></property>
+     * </bean>
+     */
+    @Email
     private String name;
 
     private int age;
