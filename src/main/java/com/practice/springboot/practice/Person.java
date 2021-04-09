@@ -1,9 +1,8 @@
 package com.practice.springboot.practice;
 
 import com.practice.springboot.practice.config.Dog;
-import org.hibernate.validator.constraints.Email;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -12,9 +11,15 @@ import java.util.Map;
 
 /**
  * 想获取配置信息，必须是容器中的bean，其实和bean初始化逻辑一种，配置文件的信息其实就是属性填充
- * @ConfigurationProperties 告诉Spring对象的值从配置文件中获取，prefix前缀表示从配置文件中哪个配置项下面获取属性值
+ * @ConfigurationProperties
+ *    1. 告诉Spring对象的值从配置文件中获取，prefix前缀表示从配置文件中哪个配置项下面获取属性值;
+ *    2. 用来读取全局配置文件(resources/application.yml,resource/application.properties),
+ *       如果全局配置文件信息太多,就需要按场景拆分,为了能够读取到配置需要使用@PropertySource注解指定配置文件
+ * @PropertySource 指定具体需要映射的配置文件,可以通过数组一次性指定多个。
+ *
  */
 @Component
+@PropertySource(value = "classpath:person.properties")
 @ConfigurationProperties(prefix = "person")
 @Validated
 public class Person {
@@ -26,7 +31,6 @@ public class Person {
      *     <property name="address" value="xxx"></property>
      * </bean>
      */
-    @Email
     private String name;
 
     private int age;
