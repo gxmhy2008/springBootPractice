@@ -1,13 +1,18 @@
 server:
   port: 8080
+spring:
+  profiles:
+    active: prod
 
-#person:
-#  name: zhangsan
-#  age: 18
-#  like: [旅游, 学习, 电影]
-#  maps:
-#    k1: 唱歌
-#    k2: 跳舞
-#  dog:
-#    name: xiaogou
-#    age: 2
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8081
+
+---
+spring:
+  profiles: prod
+server:
+  port: 8082
